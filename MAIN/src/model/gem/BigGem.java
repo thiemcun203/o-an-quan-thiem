@@ -1,6 +1,6 @@
-package gem;
+package model.gem;
 
-import gem.board.Cell;
+import model.board.Cell;
 
 public class BigGem extends Gem{
     

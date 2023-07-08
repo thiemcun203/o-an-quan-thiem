@@ -1,6 +1,6 @@
 package model.gem;
 
-import model.gem.board.Cell;
+import model.board.Cell;
 
 public abstract class Gem {
 
@@ -10,10 +10,10 @@ public abstract class Gem {
         this.cellType = cellType;
     }
 
-    public Cell getcallType(){
+    public Cell getcellType(){
         return cellType;
     }
-
+    
     public abstract int getValue();
 
     
