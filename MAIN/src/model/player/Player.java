@@ -74,6 +74,14 @@ public class Player { //set action with board
 
     }
 
+    public void spreadGems(Cell cellChosen){
+
+    }
+
+    
+
+    
+
 
 
 
