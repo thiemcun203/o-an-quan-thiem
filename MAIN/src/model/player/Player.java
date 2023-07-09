@@ -78,6 +78,10 @@ public class Player { //set action with board
 
     }
 
+    public void getCellOnSide(String player){
+        
+    }
+
     
 
     

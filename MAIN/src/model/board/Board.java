@@ -8,7 +8,9 @@ public class Board {
     private final int numHalfCircles = 2;
     private final int numBigGems = 2;
     private final int numSmallGems = 50;
-    private Cell[] cells; // list of all cells
+    private Cell[] cells; // list of all cells, use array to make it easier to access with index
+    private Cell[] player1Cells; // list of cells on player 1 side
+    private Cell[] player2Cells; // list of cells on player 2 side
 
     public int getNumSquares() {
         return numSquares;
@@ -72,4 +74,11 @@ public class Board {
         int lastPosition = numSquares + numHalfCircles - 1;
         return cells[position == lastPosition ? 0 : position + 1];
     }
+
+    public void getCellOnPlayer1(Board board) {
+        for (int i = 0; i < board.getNumSquares() / 2; i++) {
+            player1Cells[i] = board.getBoard()[i];
+        }
+    }
+    
 }

@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="768.0" fitWidth="1024.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@play-01.png" />
+            <Image url="file:/Users/nguyenbathiem/Downloads/play-01.png" />
          </image>
       </ImageView>
       <Text fx:id="scorePlayer1" fill="WHITE" layoutX="240.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100">
@@ -37,12 +37,12 @@
             </Text>
             <ImageView fx:id="btnCLCell01" fitHeight="88.0" fitWidth="49.0" layoutX="120.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
             <ImageView fx:id="btnCCLCell01" fitHeight="88.0" fitWidth="49.0" layoutX="-30.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
          </children>
@@ -56,12 +56,12 @@
             </Text>
             <ImageView fx:id="btnCLCell02" fitHeight="88.0" fitWidth="49.0" layoutX="120.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
             <ImageView fx:id="btnCCLCell02" fitHeight="88.0" fitWidth="49.0" layoutX="-30.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
          </children>
@@ -75,12 +75,12 @@
             </Text>
             <ImageView fx:id="btnCLCell03" fitHeight="88.0" fitWidth="49.0" layoutX="120.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
             <ImageView fx:id="btnCCLCell03" fitHeight="88.0" fitWidth="49.0" layoutX="-30.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
          </children>
@@ -94,12 +94,12 @@
             </Text>
             <ImageView fx:id="btnCLCell04" fitHeight="88.0" fitWidth="49.0" layoutX="120.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
             <ImageView fx:id="btnCCLCell04" fitHeight="88.0" fitWidth="49.0" layoutX="-30.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
          </children>
@@ -113,12 +113,12 @@
             </Text>
             <ImageView fx:id="btnCLCell05" fitHeight="88.0" fitWidth="49.0" layoutX="120.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
             <ImageView fx:id="btnCCLCell05" fitHeight="88.0" fitWidth="49.0" layoutX="-30.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
          </children>
@@ -137,12 +137,12 @@
             </Text>
             <ImageView fx:id="btnCCLCell07" fitHeight="88.0" fitWidth="49.0" layoutX="120.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
             <ImageView fx:id="btnCLCell07" fitHeight="88.0" fitWidth="49.0" layoutX="-30.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
          </children>
@@ -156,12 +156,12 @@
             </Text>
             <ImageView fx:id="btnCCLCell08" fitHeight="88.0" fitWidth="49.0" layoutX="120.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
             <ImageView fx:id="btnCLCell08" fitHeight="88.0" fitWidth="49.0" layoutX="-30.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
          </children>
@@ -175,12 +175,12 @@
             </Text>
             <ImageView fx:id="btnCCLCell09" fitHeight="88.0" fitWidth="49.0" layoutX="120.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
             <ImageView fx:id="btnCLCell09" fitHeight="88.0" fitWidth="49.0" layoutX="-30.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
          </children>
@@ -194,12 +194,12 @@
             </Text>
             <ImageView fx:id="btnCCLCell10" fitHeight="88.0" fitWidth="49.0" layoutX="120.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
             <ImageView fx:id="btnCLCell10" fitHeight="88.0" fitWidth="49.0" layoutX="-30.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
          </children>
@@ -213,12 +213,12 @@
             </Text>
             <ImageView fx:id="btnCCLCell11" fitHeight="88.0" fitWidth="49.0" layoutX="120.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
             <ImageView fx:id="btnCLCell11" fitHeight="88.0" fitWidth="49.0" layoutX="-30.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
-                  <Image url="@arrow.png" />
+                  <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/arrow.png" />
                </image>
             </ImageView>
          </children>
@@ -240,12 +240,12 @@
       </Label>
       <ImageView fx:id="turnPlayer2" fitHeight="192.0" fitWidth="449.0" layoutX="528.0" layoutY="587.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@frame-02.png" />
+            <Image url="file:/Users/nguyenbathiem/Downloads/frame-02.png" />
          </image>
       </ImageView>
       <ImageView fx:id="turnPlayer1" fitHeight="192.0" fitWidth="433.0" layoutX="-11.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@frame-03.png" />
+            <Image url="file:/Users/nguyenbathiem/Downloads/frame-03.png" />
          </image>
       </ImageView>
    </children>

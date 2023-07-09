@@ -6,7 +6,7 @@ import model.gem.Gem;
 public abstract class Cell {
     private int position;
     private int numberOfGems;
-    private final ArrayList<Gem> gemList = new ArrayList<Gem>();
+    private ArrayList<Gem> gemList = new ArrayList<Gem>();
 
     public Cell(int position, int numberOfGems) {
         this.position = position;

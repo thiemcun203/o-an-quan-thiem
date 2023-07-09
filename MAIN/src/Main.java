@@ -6,39 +6,41 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class Main extends Application{
+public class Main extends Application {
+
     @Override
-	public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws Exception { //make stage, make loader to load view, make scene, make controller, set controller to loader, set scene to stage, show stage
+        // Name for the application
+        final String appName = "O An Quan App";
+        primaryStage.setTitle(appName);
 
-		// Name for the application
-		final String appName = "O An Quan App";
-		primaryStage.setTitle(appName);
+        // Set icon for the application
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/view/images/icon.png")));
 
-		// Set icon for the application
+        // Set minimum window size to avoid unusual look
+        primaryStage.setMinHeight(768);
+        primaryStage.setMinWidth(1024);
 
-
-		// Set minimum windows size to avoid unusual look
-		primaryStage.setMinHeight(768);
-		primaryStage.setMinWidth(1024);
-
-		// Load view for the stage
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("MAIN/src/view/Home.fxml"));
-		Parent rootLayout = loader.load();
-		Scene scene = new Scene(rootLayout);
-		primaryStage.setScene(scene);
-
-		// Load model for view through its controller
-		HomeController homeController = loader.getController();
-		loader.setController(homeController);
+        FXMLLoader loader = new FXMLLoader(); 
+        // Load view for the stage
+        loader.setLocation(getClass().getResource("/view/Home.fxml"));
+        Parent rootLayout = loader.load();
+        Scene scene = new Scene(rootLayout);
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
 
 
-		// Display the stage
-		primaryStage.show();
+        // Load model for view through its controller
+        HomeController homeController = new HomeController(); // or loader.getController();
+        loader.setController(homeController);
 
-	}
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+
+        // Display the stage
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
