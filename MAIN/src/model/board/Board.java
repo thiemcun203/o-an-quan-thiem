@@ -31,6 +31,8 @@ public class Board {
     public Board() {
         initializeCells();
         addGemsToCells();
+        setCellOnPlayer1(null);
+        setCellOnPlayer2(null);
     }
 
     private void initializeCells() {
@@ -75,10 +77,23 @@ public class Board {
         return cells[position == lastPosition ? 0 : position + 1];
     }
 
-    public void getCellOnPlayer1(Board board) {
+    public void setCellOnPlayer1(Board board) {
         for (int i = 0; i < board.getNumSquares() / 2; i++) {
             player1Cells[i] = board.getBoard()[i];
         }
     }
-    
+
+    public void setCellOnPlayer2(Board board) {
+        for (int i = board.getNumSquares() / 2 + 2; i < board.getNumSquares() + board.getNumHalfCircles() - 1; i++) {
+            player2Cells[i] = board.getBoard()[i];
+        }
+    }
+    public Cell[] getPlayer1Cells() {
+        return player1Cells;
+    }
+
+    public Cell[] getPlayer2Cells() {
+        return player2Cells;
+    }
+
 }

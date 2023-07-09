@@ -65,21 +65,29 @@ public class Player { //set action with board
     }
 
     public void computeScore(String player){
-        if (player == player1){
+        if (player.equals(player1)){
             score1 = score1 + earnScore();
         }
-        else if (player == player2){
+        else if (player.equals(player2)){
             score2 = score2 + earnScore();
         }
 
     }
 
-    public void spreadGems(Cell cellChosen){
+    public void spreadGems(Cell cellChosen, int direction){
 
     }
 
     public void getCellOnSide(String player){
-        
+
+    }
+    public boolean endGame(){
+        if (score1 == 25 || score2 == 25){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     

@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import model.board.Board;
+import model.board.Cell;
 import model.player.Player;
 
 public class PlayController{
@@ -134,6 +136,8 @@ public class PlayController{
 
     private List<Pane> listPaneOnPlayer2 = new ArrayList<Pane>();
 
+    private Node chosen;
+
     
 
 
@@ -179,12 +183,103 @@ public class PlayController{
         listPaneOnPlayer2.add(cell10);
         listPaneOnPlayer2.add(cell11);
 
+        // construct board
+        Board board = new Board();
+
+        //get real board
+        Cell[] cells = board.getBoard();
+
+
+
+        
+
+       
+
+
+
         Player player = new Player("player1", "player2");
         int turn = player.getTurn();
-        if (turn ==1){
-            turnPlayer1.setVisible(true);
-            
+        while (player.endGame() == false){
+            if (turn == 1){
+                turnPlayer1.setVisible(true);
+                //set disable for cell on player 2
+                for (Pane pane : listPaneOnPlayer2) {
+                    pane.setDisable(true);
+                }
+
+                //get cells on player 1
+                Cell[] cellsOnPlayer1 = board.getPlayer1Cells();
+
+                //choose cell
+                
+                for (int i=0; i < cellsOnPlayer1.length; i++) {
+                    final int index = i;
+                    Pane pane = listPaneOnPlayer1.get(i);
+                    pane.setOnMouseClicked(event -> {
+                        //show direction
+                        showDirection(pane);
+                        System.out.println("Cell clicked");
+                        //set cell chosen
+                        Cell cellChosen = cellsOnPlayer1[index];
+                        player.setCellChosen(cellChosen);
+                        //set direction
+                        List<Node> children = pane.getChildren();
+                        for (Node child : children) {
+                            if (child instanceof ImageView) {
+                                ImageView imageView = (ImageView) child;
+                                imageView.setOnMouseClicked(event1 -> {
+                                    System.out.println("Direction clicked");
+                                    //set direction
+                                    chosen = child;
+                                    //hide direction
+                                    // hideDirection(pane);
+                                });
+                            }
+                        }
+                        if (chosen.getId().startsWith("btnCCL")) {
+                            player.setDirection(0);
+                        } else if (chosen.getId().startsWith("btnCL")) {
+                            player.setDirection(1);
+                        }
+                        player.spreadGems(cellsOnPlayer1[index], player.getDirection());
+                        player.switchTurn();
+                        
+                        //set disable for cell on player 1
+                        for (Pane pane1 : listPaneOnPlayer1) {
+                            pane1.setDisable(true);
+                        }
+                        //set enable for cell on player 2
+                        for (Pane pane2 : listPaneOnPlayer2) {
+                            pane2.setDisable(false);
+                        }
+                    });
+                }
+
+            }
+            else{
+                turnPlayer2.setVisible(true);
+                //set disable for cell on player 1
+                for (Pane pane : listPaneOnPlayer1) {
+                    pane.setDisable(true);
+                }
+
+                //get cells on player 2
+                Cell[] cellsOnPlayer2 = board.getPlayer2Cells();
+
+                //choose cell
+                
+                for (int i=0; i < cellsOnPlayer2.length; i++) {
+                    Pane pane = listPaneOnPlayer2.get(i);
+                    pane.setOnMouseClicked(event -> {
+                        //show direction
+                        showDirection(pane);
+                        System.out.println("");
+                    });
+
+
         }
+    }
+
 
     
 
@@ -193,18 +288,6 @@ public class PlayController{
             pane.setOnMouseClicked(event -> {
                 showDirection(pane);
                 System.out.println("Cell clicked");
-
-                // Set action for each direction
-                // for (Node child : pane.getChildren()) {
-                //     if (child instanceof ImageView) {
-                //         ImageView imageView = (ImageView) child;
-                //         imageView.setOnMouseClicked(event1 -> {
-                //             System.out.println("Direction clicked");
-                //             hideDirection(pane);
-                //         });
-                //     }
-                // }
-
             
             });
         }
@@ -218,6 +301,8 @@ public class PlayController{
             });
         }
     }
+}
+    
 
     public void showDirection(Pane pane) {
         // Retrieve the children of the Pane
