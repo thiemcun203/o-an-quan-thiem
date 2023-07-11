@@ -15,15 +15,6 @@ import model.board.Cell;
 import model.player.Player;
 
 public class PlayController{
-
-    private Player player;
-    private Board board;
-
-    public PlayController(Player player, Board board) {
-        this.player = player;
-        this.board = board;
-    }
-
     @FXML
     private ImageView btnCCLCell01;
 
@@ -169,9 +160,14 @@ public class PlayController{
     private ImageView turnPlayer2;
 
     private List<Pane> listPaneOnPlayer1 = new ArrayList<Pane>(); // not exist -> need to declare
-
     private List<Pane> listPaneOnPlayer2 = new ArrayList<Pane>();
+    private Player player;
+    private Board board;
 
+    public PlayController(Player player, Board board) {
+        this.player = player;
+        this.board = board;
+    }
 
     @FXML
     public void initialize() {
@@ -247,7 +243,6 @@ public class PlayController{
                         System.out.println("Direction clicked");
 
                         // Set the direction
-                        
                         if (imageView.getId().startsWith("btnCCL")) {
                             player.setDirection(0);
                         } else if (imageView.getId().startsWith("btnCL")) {
@@ -256,8 +251,7 @@ public class PlayController{
 
                         //spread gems
                         player.spreadGems("player1",board.getBoard()[index+1], player.getDirection());
-                         // Hide the direction
-                        
+
                         //display number of gems
                         numGemsCell00.setText(Integer.toString(board.getBoard()[0].getGemList().size()));
                         numGemsCell01.setText(Integer.toString(board.getBoard()[1].getGemList().size()));
@@ -316,7 +310,6 @@ public class PlayController{
                         System.out.println("Direction clicked");
                         
                         // Set the direction
-                        
                         if (imageView.getId().startsWith("btnCCL")) {
                             player.setDirection(0);
                         } else if (imageView.getId().startsWith("btnCL")) {
@@ -390,19 +383,22 @@ public class PlayController{
     }
 
     public void switchTurn(Pane paneChosen){
+
+        List<Node> children = paneChosen.getChildren();
+
+        // Set both direction buttons in the pane to invisible
+        for (Node child : children) {
+            if (child instanceof ImageView) {
+                child.setVisible(false);
+            }
+        }
+
         if (player.getTurn() == 1){
 
-            List<Node> children = paneChosen.getChildren();
-
-
-            children.get(1).setVisible(false);
-            children.get(2).setVisible(false);
-
+            // display turn
             turnPlayer1.setVisible(false);
             turnPlayer2.setVisible(true);
-
             
-
             //set able for cells 1
             for (int i=0; i < board.getNumSquares()/2; i++) {
                 Pane pane = listPaneOnPlayer1.get(i);
@@ -416,13 +412,10 @@ public class PlayController{
             }
 
             player.setTurn(2);
-        }
-        else{
+        
+        }else{
 
-            List<Node> children = paneChosen.getChildren();
-
-            children.get(1).setVisible(false);
-            children.get(2).setVisible(false);
+            // display turn
             turnPlayer1.setVisible(true);
             turnPlayer2.setVisible(false);
             
@@ -438,11 +431,9 @@ public class PlayController{
                 pane.setDisable(true);
             }
             player.setTurn(1);
+            }
         }
-
-        
-    }
-
+    
     public void showDirection(Pane pane) {
         // Retrieve the children of the Pane
         List<Node> children = pane.getChildren();

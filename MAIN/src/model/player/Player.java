@@ -1,8 +1,5 @@
 package model.player;
 
-import java.util.Random;
-
-import javafx.scene.shape.Circle;
 import model.board.Board;
 import model.board.Cell;
 import model.board.HalfCircle;
@@ -81,17 +78,14 @@ public class Player { //set action with board
         else if (player.equals(player2)){
             score2 = score2 + earnedScore;
         }
-
     }
 
     public int getScore(String player1){
         if (player1.equals(player1)){
             return score1;
-            
         }
         else if (player1.equals(player2)){
             return score2;
-            
         }
         return 0;
     }
@@ -140,7 +134,6 @@ public class Player { //set action with board
 
             else if (direction == 0) { //counter clockwise
                 // Cell stopCell;
-
                 //spread first round
                 for (int i = locationChosen - 1; i > locationChosen - 6; i--) {
                     if (i >= 0) {
@@ -154,8 +147,8 @@ public class Player { //set action with board
                     }
                     
                 }
-                cellChosen.setEmpty();
 
+                cellChosen.setEmpty();
                 //check contuinity
                 if (locationChosen - 5 >= 0){
                     stopCell = board.getBoard()[locationChosen - 5];
@@ -185,20 +178,10 @@ public class Player { //set action with board
                             nextStopCell = board.getNextCellCounterClockwise(earnedCell);
 
                         }
-                        
                         //switch turn
                     }
                 }
-
             }
-
-            
-                
-                
-                
-
-        
-
         }
 
     }

@@ -99,7 +99,7 @@ public class Board {
     public boolean endGame(){
         //check big gem in half circle
         Cell[] cells = this.getBoard();
-        
+
         for (Gem gem :cells[0].getGemList()){
             if (gem instanceof BigGem){
                 return false;
@@ -111,15 +111,8 @@ public class Board {
                 return false;
             }
         }
-
-        // for (int i =0; i<= numHalfCircles + numSquares; i++){
-        //     if (cells[i].getGemList().size() > 0){
-        //         return false;
-        //     }
-        // }
-
+        
         return true;
-
     }
 
 }

@@ -50,7 +50,4 @@ public abstract class Cell {
             return gemList.remove(0); // Return the moved gem
         }
     }
-    
-    
-
 }
