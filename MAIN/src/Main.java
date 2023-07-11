@@ -29,12 +29,9 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
 
-
         // Load model for view through its controller
         HomeController homeController = new HomeController(); // or loader.getController();
         loader.setController(homeController);
-
-
 
         // Display the stage
         primaryStage.show();
@@ -43,4 +40,10 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    
+
 }
+
+
+

@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -15,7 +16,12 @@ import model.player.Player;
 
 public class PlayController{
 
-    public PlayController() {
+    private Player player;
+    private Board board;
+
+    public PlayController(Player player, Board board) {
+        this.player = player;
+        this.board = board;
     }
 
     @FXML
@@ -115,10 +121,40 @@ public class PlayController{
     private Pane cell11;
 
     @FXML
-    private Text numBigGem1;
+    private Text numGemsCell00;
 
     @FXML
-    private Text numBigGem2;
+    private Text numGemsCell01;
+
+    @FXML
+    private Text numGemsCell02;
+
+    @FXML
+    private Text numGemsCell03;
+
+    @FXML
+    private Text numGemsCell04;
+
+    @FXML
+    private Text numGemsCell05;
+
+    @FXML
+    private Text numGemsCell06;
+
+    @FXML
+    private Text numGemsCell07;
+
+    @FXML
+    private Text numGemsCell08;
+
+    @FXML
+    private Text numGemsCell09;
+
+    @FXML
+    private Text numGemsCell10;
+
+    @FXML
+    private Text numGemsCell11;
 
     @FXML
     private Text scorePlayer1;
@@ -132,14 +168,9 @@ public class PlayController{
     @FXML
     private ImageView turnPlayer2;
 
-    private List<Pane> listPaneOnPlayer1 = new ArrayList<Pane>();
+    private List<Pane> listPaneOnPlayer1 = new ArrayList<Pane>(); // not exist -> need to declare
 
     private List<Pane> listPaneOnPlayer2 = new ArrayList<Pane>();
-
-    private Node chosen;
-
-    
-
 
 
     @FXML
@@ -183,166 +214,248 @@ public class PlayController{
         listPaneOnPlayer2.add(cell10);
         listPaneOnPlayer2.add(cell11);
 
-        // construct board
-        Board board = new Board();
+        //get cells on player 1
+        Cell[] cellsOnPlayer1 = board.getPlayer1Cells(); // may be remove
+        for (int i=0; i < cellsOnPlayer1.length; i++) {
+            int index = i;
+            Pane pane = listPaneOnPlayer1.get(i);
+            pane.setOnMouseClicked(event -> {
+                //show direction
+                System.out.println("before clicking direction"+Integer.toString(board.getBoard()[index+1].getGemList().size()));
 
-        //get real board
-        Cell[] cells = board.getBoard();
-
-
-
-        
-
-       
-
-
-
-        Player player = new Player("player1", "player2");
-        int turn = player.getTurn();
-        while (player.endGame() == false){
-            if (turn == 1){
-                turnPlayer1.setVisible(true);
-                //set disable for cell on player 2
-                for (Pane pane : listPaneOnPlayer2) {
-                    pane.setDisable(true);
+                showDirection(pane);
+                System.out.println("Cell clicked");
+                for (int j=0; j < cellsOnPlayer1.length; j++){
+                    if (j != index ){
+                        Pane paneAround = listPaneOnPlayer1.get(j);
+                        paneAround.setDisable(true);
+                    }
                 }
-
-                //get cells on player 1
-                Cell[] cellsOnPlayer1 = board.getPlayer1Cells();
-
-                //choose cell
                 
-                for (int i=0; i < cellsOnPlayer1.length; i++) {
-                    final int index = i;
-                    Pane pane = listPaneOnPlayer1.get(i);
-                    pane.setOnMouseClicked(event -> {
-                        //show direction
-                        showDirection(pane);
-                        System.out.println("Cell clicked");
-                        //set cell chosen
-                        Cell cellChosen = cellsOnPlayer1[index];
-                        player.setCellChosen(cellChosen);
-                        //set direction
-                        List<Node> children = pane.getChildren();
-                        for (Node child : children) {
-                            if (child instanceof ImageView) {
-                                ImageView imageView = (ImageView) child;
-                                imageView.setOnMouseClicked(event1 -> {
-                                    System.out.println("Direction clicked");
-                                    //set direction
-                                    chosen = child;
-                                    //hide direction
-                                    // hideDirection(pane);
-                                });
-                            }
-                        }
-                        if (chosen.getId().startsWith("btnCCL")) {
+            });
+        }
+
+        //set direction then spread gems of player 1
+        for (int i=0; i < cellsOnPlayer1.length; i++){
+            int index = i;
+            Pane pane = listPaneOnPlayer1.get(index);
+            List<Node> children = pane.getChildren();
+            for (Node child : children) {
+                if (child instanceof ImageView) {
+                    ImageView imageView = (ImageView) child;
+                    imageView.setOnMouseClicked(event1 -> {
+                        System.out.println("Direction clicked");
+
+                        // Set the direction
+                        
+                        if (imageView.getId().startsWith("btnCCL")) {
                             player.setDirection(0);
-                        } else if (chosen.getId().startsWith("btnCL")) {
+                        } else if (imageView.getId().startsWith("btnCL")) {
                             player.setDirection(1);
                         }
-                        player.spreadGems(cellsOnPlayer1[index], player.getDirection());
-                        player.switchTurn();
+
+                        //spread gems
+                        player.spreadGems("player1",board.getBoard()[index+1], player.getDirection());
+                         // Hide the direction
                         
-                        //set disable for cell on player 1
-                        for (Pane pane1 : listPaneOnPlayer1) {
-                            pane1.setDisable(true);
-                        }
-                        //set enable for cell on player 2
-                        for (Pane pane2 : listPaneOnPlayer2) {
-                            pane2.setDisable(false);
-                        }
-                    });
-                }
+                        //display number of gems
+                        numGemsCell00.setText(Integer.toString(board.getBoard()[0].getGemList().size()));
+                        numGemsCell01.setText(Integer.toString(board.getBoard()[1].getGemList().size()));
+                        numGemsCell02.setText(Integer.toString(board.getBoard()[2].getGemList().size()));
+                        numGemsCell03.setText(Integer.toString(board.getBoard()[3].getGemList().size()));
+                        numGemsCell04.setText(Integer.toString(board.getBoard()[4].getGemList().size()));
+                        numGemsCell05.setText(Integer.toString(board.getBoard()[5].getGemList().size()));
+                        numGemsCell06.setText(Integer.toString(board.getBoard()[6].getGemList().size()));
+                        numGemsCell07.setText(Integer.toString(board.getBoard()[7].getGemList().size()));
+                        numGemsCell08.setText(Integer.toString(board.getBoard()[8].getGemList().size()));
+                        numGemsCell09.setText(Integer.toString(board.getBoard()[9].getGemList().size()));
+                        numGemsCell10.setText(Integer.toString(board.getBoard()[10].getGemList().size()));
+                        numGemsCell11.setText(Integer.toString(board.getBoard()[11].getGemList().size()));
 
+                        //set score
+                        scorePlayer1.setText(Integer.toString(player.getScore("player1")));
+                        System.out.println("after clicking direction"+Integer.toString(board.getBoard()[index+1].getGemList().size()));
+                        switchTurn(pane); // still have error when click to direction it not change turn, 3 time after and also not invisible
+                        System.out.println(Integer.toString(player.getTurn()));
+                        event1.consume();
+                    });
+
+
+                }
             }
-            else{
-                turnPlayer2.setVisible(true);
-                //set disable for cell on player 1
-                for (Pane pane : listPaneOnPlayer1) {
-                    pane.setDisable(true);
+        }
+
+        //get cells on player 2
+        Cell[] cellsOnPlayer2 = board.getPlayer2Cells();
+        for (int i=0; i < cellsOnPlayer2.length; i++) {
+            int index = i;
+            Pane pane = listPaneOnPlayer2.get(i);
+            pane.setOnMouseClicked(event2 -> {
+                System.out.println("before clicking direction"+Integer.toString(board.getBoard()[index+7].getGemList().size()));
+                //show direction
+                showDirection(pane);
+                System.out.println("Cell clicked");
+                for (int j=0; j < cellsOnPlayer2.length; j++){
+                    if (j != index ){
+                        Pane paneAround = listPaneOnPlayer2.get(j);
+                        paneAround.setDisable(true);
+                    }
                 }
+            });
+        }
 
-                //get cells on player 2
-                Cell[] cellsOnPlayer2 = board.getPlayer2Cells();
+        //set direction then spread gems of player 2
+        for (int i=0; i < cellsOnPlayer2.length; i++){
+            int index = i;
+            Pane pane = listPaneOnPlayer2.get(index);
+            List<Node> children = pane.getChildren();
+            for (Node child : children) {
+                if (child instanceof ImageView) {
+                    ImageView imageView = (ImageView) child;
+                    imageView.setOnMouseClicked(event3 -> {
+                        System.out.println("Direction clicked");
+                        
+                        // Set the direction
+                        
+                        if (imageView.getId().startsWith("btnCCL")) {
+                            player.setDirection(0);
+                        } else if (imageView.getId().startsWith("btnCL")) {
+                            player.setDirection(1);
+                        }
 
-                //choose cell
-                
-                for (int i=0; i < cellsOnPlayer2.length; i++) {
-                    Pane pane = listPaneOnPlayer2.get(i);
-                    pane.setOnMouseClicked(event -> {
-                        //show direction
-                        showDirection(pane);
-                        System.out.println("");
+                        //spread gems
+                        player.spreadGems("player2",board.getBoard()[index+7], player.getDirection());
+                        //display number of gems
+                        numGemsCell00.setText(Integer.toString(board.getBoard()[0].getGemList().size()));
+                        numGemsCell01.setText(Integer.toString(board.getBoard()[1].getGemList().size()));
+                        numGemsCell02.setText(Integer.toString(board.getBoard()[2].getGemList().size()));
+                        numGemsCell03.setText(Integer.toString(board.getBoard()[3].getGemList().size()));
+                        numGemsCell04.setText(Integer.toString(board.getBoard()[4].getGemList().size()));
+                        numGemsCell05.setText(Integer.toString(board.getBoard()[5].getGemList().size()));
+                        numGemsCell06.setText(Integer.toString(board.getBoard()[6].getGemList().size()));
+                        numGemsCell07.setText(Integer.toString(board.getBoard()[7].getGemList().size()));
+                        numGemsCell08.setText(Integer.toString(board.getBoard()[8].getGemList().size()));
+                        numGemsCell09.setText(Integer.toString(board.getBoard()[9].getGemList().size()));
+                        numGemsCell10.setText(Integer.toString(board.getBoard()[10].getGemList().size()));
+                        numGemsCell11.setText(Integer.toString(board.getBoard()[11].getGemList().size()));
+
+                        //set score
+                        scorePlayer2.setText(Integer.toString(player.getScore("player2")));
+                        System.out.println("after clicking direction"+Integer.toString(board.getBoard()[index+7].getGemList().size()));
+
+                        // switch turn
+                        switchTurn(pane);
+                        System.out.println(Integer.toString(player.getTurn()));
+                        event3.consume();
                     });
-
-
+                }
+            }
         }
+
+        // run
+        Random rand = new Random();
+        int randTurn = rand.nextInt(2) + 1;
+        player.setTurn(randTurn);
+        if (player.getTurn() == 1){
+            turnPlayer1.setVisible(true);
+            turnPlayer2.setVisible(false);
+            //set able for cells 1
+            for (int i=0; i < board.getNumSquares()/2; i++) {
+                Pane pane = listPaneOnPlayer1.get(i);
+                pane.setDisable(false);
+            }
+
+            //set disable for cells 2
+            for (int i=0; i < board.getNumSquares()/2; i++) {
+                Pane pane = listPaneOnPlayer2.get(i);
+                pane.setDisable(true);
+            }
+        }
+        else{
+            turnPlayer1.setVisible(false);
+            turnPlayer2.setVisible(true);
+            //set disable for cells 1
+            for (int i=0; i < board.getNumSquares()/2; i++) {
+                Pane pane = listPaneOnPlayer1.get(i);
+                pane.setDisable(true);
+            }
+
+            //set able for cells 2
+            for (int i=0; i < board.getNumSquares()/2; i++) {
+                Pane pane = listPaneOnPlayer2.get(i);
+                pane.setDisable(false);
+            }
+        }
+
     }
 
+    public void switchTurn(Pane paneChosen){
+        if (player.getTurn() == 1){
 
-    
+            List<Node> children = paneChosen.getChildren();
 
-        //set action for each cell
-        for (Pane pane : listPaneOnPlayer1) {
-            pane.setOnMouseClicked(event -> {
-                showDirection(pane);
-                System.out.println("Cell clicked");
+
+            children.get(1).setVisible(false);
+            children.get(2).setVisible(false);
+
+            turnPlayer1.setVisible(false);
+            turnPlayer2.setVisible(true);
+
             
-            });
+
+            //set able for cells 1
+            for (int i=0; i < board.getNumSquares()/2; i++) {
+                Pane pane = listPaneOnPlayer1.get(i);
+                pane.setDisable(true);
+            }
+
+            //set disable for cells 2
+            for (int i=0; i < board.getNumSquares()/2; i++) {
+                Pane pane = listPaneOnPlayer2.get(i);
+                pane.setDisable(false);
+            }
+
+            player.setTurn(2);
+        }
+        else{
+
+            List<Node> children = paneChosen.getChildren();
+
+            children.get(1).setVisible(false);
+            children.get(2).setVisible(false);
+            turnPlayer1.setVisible(true);
+            turnPlayer2.setVisible(false);
+            
+            //set disable for cells 1
+            for (int i=0; i < board.getNumSquares()/2; i++) {
+                Pane pane = listPaneOnPlayer1.get(i);
+                pane.setDisable(false);
+            }
+
+            //set able for cells 2
+            for (int i=0; i < board.getNumSquares()/2; i++) {
+                Pane pane = listPaneOnPlayer2.get(i);
+                pane.setDisable(true);
+            }
+            player.setTurn(1);
         }
 
-        for (Pane pane : listPaneOnPlayer2) {
-            pane.setOnMouseClicked(event -> {
-                showDirection(pane);
-                System.out.println("Cell clicked");
-                //set cell chosen
-                //set direction
-            });
-        }
+        
     }
-}
-    
 
     public void showDirection(Pane pane) {
         // Retrieve the children of the Pane
         List<Node> children = pane.getChildren();
-
         // Loop through the children of the Pane
         for (Node child : children) {
             // Check if the child is an ImageView
             if (child instanceof ImageView) {
                 ImageView imageView = (ImageView) child;
                 // Set the visibility of the ImageView to true
-                imageView.setVisible(true);
-                //set action for child
-                imageView.setOnMouseClicked(event -> {
-                    System.out.println("Direction clicked");
-                    pane.setVisible(false);
-                });
-                
+                imageView.setVisible(true); 
             }
         }
     }
-
-    public void hideDirection(Pane pane) {
-        // Retrieve the children of the Pane
-        List<Node> children = pane.getChildren();
-
-        // Loop through the children of the Pane
-        for (Node child : children) {
-            // Check if the child is an ImageView
-            if (child instanceof ImageView) {
-                ImageView imageView = (ImageView) child;
-                // Set the visibility of the ImageView to false
-                imageView.setVisible(false);
-            }
-        }
-
-        // Set the visibility of the Pane to false
-        pane.setVisible(false);
-    }
-
 
 }
 
