@@ -1,15 +1,20 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import model.board.Board;
 import model.board.Cell;
 import model.player.Player;
@@ -159,6 +164,16 @@ public class PlayController{
     @FXML
     private ImageView turnPlayer2;
 
+    @FXML
+    private Button btnHomeWinner;
+
+    @FXML
+    private Button btnPlayAgain;
+
+
+    @FXML
+    private ImageView endGameScreen;
+
     private List<Pane> listPaneOnPlayer1 = new ArrayList<Pane>(); // not exist -> need to declare
     private List<Pane> listPaneOnPlayer2 = new ArrayList<Pane>();
     private Player player;
@@ -210,6 +225,24 @@ public class PlayController{
         listPaneOnPlayer2.add(cell10);
         listPaneOnPlayer2.add(cell11);
 
+        //set end game screen invisible
+        btnPlayAgain.setOnAction(event5 ->{
+            endGameScreen.setVisible(false);
+            board = new Board();
+            player = new Player("player1", "player2", board);
+            initialize();
+        });
+
+        btnHomeWinner.setOnAction(event6 ->{
+            // new HomeController();
+            // Stage currentStage = (Stage) cell01.getScene().getWindow();
+            // currentStage.close();
+            endGameScreen.setVisible(false);
+
+        });
+        
+        endGameScreen.setVisible(false);
+
         //get cells on player 1
         Cell[] cellsOnPlayer1 = board.getPlayer1Cells(); // may be remove
         for (int i=0; i < cellsOnPlayer1.length; i++) {
@@ -217,7 +250,6 @@ public class PlayController{
             Pane pane = listPaneOnPlayer1.get(i);
             pane.setOnMouseClicked(event -> {
 
-                
                 if (cellsOnPlayer1[index].getGemList().size() == 0){
                     pane.setDisable(false);
                     System.out.println("Cell could not be clicked");
@@ -269,15 +301,17 @@ public class PlayController{
                         player.spreadGems("player1",board.getBoard()[index+1], player.getDirection());
 
                         //fake end game
-                        // board.getBoard()[0].setEmpty();
-                        // board.getBoard()[6].setEmpty();
+                        board.getBoard()[0].setEmpty();
+                        board.getBoard()[6].setEmpty();
 
                         //check end game
                         if (board.endGame()){
                             System.out.println("end game");
                             player.assembleSmallGems();
                             scorePlayer2.setText(Integer.toString(player.getScore("player2")));
-                            // scorePlayer1.setText(Integer.toString(player.getScore("player1")));
+                            endGameScreen.setVisible(true);
+                            scorePlayer1.setText(Integer.toString(player.getScore("player1")));
+
                             
 
                           
@@ -367,8 +401,8 @@ public class PlayController{
                         player.spreadGems("player2",board.getBoard()[index+7], player.getDirection());
 
                         //fake end game
-                        // board.getBoard()[0].setEmpty();
-                        // board.getBoard()[6].setEmpty();
+                        board.getBoard()[0].setEmpty();
+                        board.getBoard()[6].setEmpty();
 
                         //check end game
                         if (board.endGame()){
@@ -376,6 +410,7 @@ public class PlayController{
                             player.assembleSmallGems();
                             scorePlayer2.setText(Integer.toString(player.getScore("player2")));
                             scorePlayer1.setText(Integer.toString(player.getScore("player1")));
+                            endGameScreen.setVisible(true);
 
     
                           

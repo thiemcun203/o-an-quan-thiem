@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "model.gem.Main",
+            "projectName": "o-an-quan-thiem_48828556"
+        },
+        {
+            "type": "java",
             "name": "Play",
             "request": "launch",
             "mainClass": "application.Play",
