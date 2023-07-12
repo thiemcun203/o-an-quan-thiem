@@ -9,8 +9,8 @@ import model.board.Square;
 import model.gem.Gem;
 
 public class Player { //set action with board
-    private static int score1 = 0;
-    private static int score2 = 0;
+    private int score1 = 0;
+    private int score2 = 0;
     private String player1;
     private String player2;
     private int turn;
@@ -89,10 +89,7 @@ public class Player { //set action with board
         }
         return 0;
     }
-    public void resetScore(){
-        this.score1 = 0;
-        this.score2 = 0;
-    }
+
 
     public void spreadGems(String player, Cell cellChosen, int direction){
             Cell stopCell;

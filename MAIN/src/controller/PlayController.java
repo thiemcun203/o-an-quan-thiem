@@ -244,18 +244,42 @@ public class PlayController{
             }
         }
 
-        //set end game screen invisible
-        btnPlayAgain.setOnAction(event5 ->{
+        //set play again button
+        btnPlayAgain.setOnAction(event ->{
             endGameScreen.setVisible(false);
             //reset board
             board = new Board();
             player = new Player("player1", "player2", board);
             initialize();
             //reset score
-            player.resetScore();
+            // player.resetScore();
             this.setDisplay();
 
         });
+
+        //set home button
+        btnHomeWinner.setOnAction(event ->{
+            endGameScreen.setVisible(false);
+            Stage currentStage = (Stage) btnHomeWinner.getScene().getWindow();
+            currentStage.close();
+            // player.resetScore();
+            
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Home.fxml"));
+                Parent root = fxmlLoader.load();
+                HomeController homeController = fxmlLoader.getController();
+                homeController.initialize();
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.setTitle("O An Quan Home Screen");
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+            });
+            
+
 
         endGameScreen.setVisible(false);
 
@@ -340,7 +364,7 @@ public class PlayController{
                         // switch turn
                         switchTurn(pane); // still have error when click to direction it not change turn, 3 time after and also not invisible
 
-                        //consume event avoid to click to parent
+                        //consume event avoid clicking to parent
                         event1.consume();
                     });
 
@@ -430,7 +454,8 @@ public class PlayController{
 
                         // switch turn
                         switchTurn(pane);
-                        System.out.println(Integer.toString(player.getTurn()));
+
+                        // consume event avoid to click to parent
                         event3.consume();
                     });
                 }

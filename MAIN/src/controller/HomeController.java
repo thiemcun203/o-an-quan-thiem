@@ -17,7 +17,7 @@ public class HomeController {
     private Button btnStart;
 
     @FXML
-    private void initialize() {
+    public void initialize() {
         btnStart.setOnAction(event -> {
             System.out.println("Start button pressed");
              // Close the current window (optional)

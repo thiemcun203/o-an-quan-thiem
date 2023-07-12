@@ -5,13 +5,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import model.board.Board;
+import model.player.Player;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception { //make stage, make loader to load view, make scene, make controller, set controller to loader, set scene to stage, show stage
         // Name for the application
-        final String appName = "O An Quan App";
+        final String appName = "O An Quan Home Screen";
         primaryStage.setTitle(appName);
 
         // Set icon for the application
@@ -30,6 +32,8 @@ public class Main extends Application {
         primaryStage.setResizable(false);
 
         // Load model for view through its controller
+        // Board board = new Board();
+        // Player player = new Player("player1", "player2", board);
         HomeController homeController = new HomeController(); // or loader.getController();
         loader.setController(homeController);
 
