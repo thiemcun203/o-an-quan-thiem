@@ -216,19 +216,35 @@ public class PlayController{
             int index = i;
             Pane pane = listPaneOnPlayer1.get(i);
             pane.setOnMouseClicked(event -> {
-                //show direction
-                System.out.println("before clicking direction"+Integer.toString(board.getBoard()[index+1].getGemList().size()));
 
-                showDirection(pane);
-                System.out.println("Cell clicked");
-                for (int j=0; j < cellsOnPlayer1.length; j++){
-                    if (j != index ){
-                        Pane paneAround = listPaneOnPlayer1.get(j);
-                        paneAround.setDisable(true);
-                    }
-                }
                 
+                if (cellsOnPlayer1[index].getGemList().size() == 0){
+                    pane.setDisable(false);
+                    System.out.println("Cell could not be clicked");
+                    
+                }
+                else{
+                    // show direction
+                    showDirection(pane);
+                    System.out.println("Cell clicked");
+                
+                    for (int j=0; j < cellsOnPlayer1.length; j++){
+                        Pane paneAround = listPaneOnPlayer1.get(j);
+                        if (j != index ){
+                            paneAround.setDisable(true);
+                        }
+                        
+                    }
+
+                }
+
+                
+
+            
+
             });
+
+            
         }
 
         //set direction then spread gems of player 1
@@ -252,7 +268,21 @@ public class PlayController{
                         //spread gems
                         player.spreadGems("player1",board.getBoard()[index+1], player.getDirection());
 
-                        //display number of gems
+                        //fake end game
+                        // board.getBoard()[0].setEmpty();
+                        // board.getBoard()[6].setEmpty();
+
+                        //check end game
+                        if (board.endGame()){
+                            System.out.println("end game");
+                            player.assembleSmallGems();
+                            scorePlayer2.setText(Integer.toString(player.getScore("player2")));
+                            // scorePlayer1.setText(Integer.toString(player.getScore("player1")));
+                            
+
+                          
+                        }
+                        //display number of gems on board 
                         numGemsCell00.setText(Integer.toString(board.getBoard()[0].getGemList().size()));
                         numGemsCell01.setText(Integer.toString(board.getBoard()[1].getGemList().size()));
                         numGemsCell02.setText(Integer.toString(board.getBoard()[2].getGemList().size()));
@@ -266,11 +296,17 @@ public class PlayController{
                         numGemsCell10.setText(Integer.toString(board.getBoard()[10].getGemList().size()));
                         numGemsCell11.setText(Integer.toString(board.getBoard()[11].getGemList().size()));
 
-                        //set score
+                        
+                        
+                        //display score
                         scorePlayer1.setText(Integer.toString(player.getScore("player1")));
                         System.out.println("after clicking direction"+Integer.toString(board.getBoard()[index+1].getGemList().size()));
+                        
+                        // switch turn
                         switchTurn(pane); // still have error when click to direction it not change turn, 3 time after and also not invisible
                         System.out.println(Integer.toString(player.getTurn()));
+
+                        //consume event avoid to click to parent
                         event1.consume();
                     });
 
@@ -285,17 +321,28 @@ public class PlayController{
             int index = i;
             Pane pane = listPaneOnPlayer2.get(i);
             pane.setOnMouseClicked(event2 -> {
-                System.out.println("before clicking direction"+Integer.toString(board.getBoard()[index+7].getGemList().size()));
-                //show direction
-                showDirection(pane);
-                System.out.println("Cell clicked");
-                for (int j=0; j < cellsOnPlayer2.length; j++){
-                    if (j != index ){
+
+              if (cellsOnPlayer2[index].getGemList().size() == 0){
+                    pane.setDisable(false);
+                    System.out.println("Cell could not be clicked");
+                    
+                }
+                else{
+                    // show direction
+                    showDirection(pane);
+                    System.out.println("Cell clicked");
+                
+                    for (int j=0; j < cellsOnPlayer2.length; j++){
                         Pane paneAround = listPaneOnPlayer2.get(j);
-                        paneAround.setDisable(true);
+                        if (j != index ){
+                            paneAround.setDisable(true);
+                        }
+                        
                     }
+
                 }
             });
+            
         }
 
         //set direction then spread gems of player 2
@@ -318,6 +365,22 @@ public class PlayController{
 
                         //spread gems
                         player.spreadGems("player2",board.getBoard()[index+7], player.getDirection());
+
+                        //fake end game
+                        // board.getBoard()[0].setEmpty();
+                        // board.getBoard()[6].setEmpty();
+
+                        //check end game
+                        if (board.endGame()){
+                            System.out.println("end game");
+                            player.assembleSmallGems();
+                            scorePlayer2.setText(Integer.toString(player.getScore("player2")));
+                            scorePlayer1.setText(Integer.toString(player.getScore("player1")));
+
+    
+                          
+                        }
+
                         //display number of gems
                         numGemsCell00.setText(Integer.toString(board.getBoard()[0].getGemList().size()));
                         numGemsCell01.setText(Integer.toString(board.getBoard()[1].getGemList().size()));
@@ -332,9 +395,13 @@ public class PlayController{
                         numGemsCell10.setText(Integer.toString(board.getBoard()[10].getGemList().size()));
                         numGemsCell11.setText(Integer.toString(board.getBoard()[11].getGemList().size()));
 
+                        
+
                         //set score
                         scorePlayer2.setText(Integer.toString(player.getScore("player2")));
-                        System.out.println("after clicking direction"+Integer.toString(board.getBoard()[index+7].getGemList().size()));
+                        System.out.println("after clicking direction" + Integer.toString(board.getBoard()[index+7].getGemList().size()));
+
+                        
 
                         // switch turn
                         switchTurn(pane);

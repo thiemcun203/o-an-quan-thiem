@@ -6,12 +6,33 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Play",
+            "request": "launch",
+            "mainClass": "application.Play",
+            "projectName": "o-an-quan-thiem_48828556"
+        },
+        {
+            "type": "java",
+            "name": "MainApp",
+            "request": "launch",
+            "mainClass": "application.MainApp",
+            "projectName": "o-an-quan-thiem_48828556",
+            "vmArgs": "--module-path /Users/nguyenbathiem/Downloads/javafx-sdk-20.0.1/lib --add-modules=javafx.controls,javafx.fxml,javafx.media"
+        },
+        {
+            "type": "java",
+            "name": "PopupExample",
+            "request": "launch",
+            "mainClass": "application.PopupExample",
+            "projectName": "o-an-quan-thiem_48828556",
+            "vmArgs": "--module-path /Users/nguyenbathiem/Downloads/javafx-sdk-20.0.1/lib --add-modules=javafx.controls,javafx.fxml,javafx.media"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}",
             "vmArgs": "--module-path /Users/nguyenbathiem/Downloads/javafx-sdk-20.0.1/lib --add-modules=javafx.controls,javafx.fxml,javafx.media"
-
-
         },
         {
             "type": "java",
@@ -20,7 +41,6 @@
             "mainClass": "Main",
             "projectName": "o-an-quan-thiem_48828556",
             "vmArgs": "--module-path /Users/nguyenbathiem/Downloads/javafx-sdk-20.0.1/lib --add-modules=javafx.controls,javafx.fxml,javafx.media"
-
         }
     ]
 }

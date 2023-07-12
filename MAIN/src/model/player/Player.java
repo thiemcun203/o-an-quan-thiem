@@ -71,7 +71,6 @@ public class Player { //set action with board
         return sum;
     }
     
-
     public void computeScore(String player, int earnedScore){
         if (player.equals(player1)){
             this.score1 = this.score1 + earnedScore;
@@ -125,7 +124,7 @@ public class Player { //set action with board
                     while ((nextStopCell.isEmpty()) && !(board.getNextCellClockwise(nextStopCell).isEmpty()) ){
                     Cell earnedCell = board.getNextCellClockwise(nextStopCell);
                     int earnedScore = earnScore(earnedCell);
-                    System.out.println(earnedScore);
+                    // System.out.println(earnedScore);
                     earnedCell.setEmpty();
                     computeScore(player,earnedScore);
                     nextStopCell = board.getNextCellClockwise(earnedCell);
@@ -164,7 +163,7 @@ public class Player { //set action with board
                         if (earnedCell.getGemList().size() > 0){
                             int earnedScore = earnScore(earnedCell);
                             earnedCell.setEmpty();
-                            System.out.println(earnedScore);
+                            // System.out.println(earnedScore);
                             this.computeScore(player, earnedScore);
                             nextStopCell = board.getNextCellCounterClockwise(earnedCell);
 
@@ -173,6 +172,25 @@ public class Player { //set action with board
                     }
                 }
             }
+        }
+
+        public void assembleSmallGems(){
+            
+            for (int i = 0; i < board.getNumSquares()/2; i++){
+                Cell cell1 = board.getPlayer1Cells()[i];
+                int earnedScore1 = earnScore(cell1);
+                cell1.setEmpty();
+                this.computeScore(this.player1, earnedScore1);
+
+                Cell cell2 = board.getPlayer2Cells()[i];
+                int earnedScore2 = earnScore(cell2);
+                cell2.setEmpty();
+               
+                this.computeScore(this.player2, earnedScore2);
+                
+            }
+            
+           
         }
 
     }
