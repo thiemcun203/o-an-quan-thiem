@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -172,10 +173,17 @@ public class PlayController{
 
 
     @FXML
-    private ImageView endGameScreen;
+    private  AnchorPane  endGameScreen;
+
+    @FXML
+    private Text winnerName;
+
+    @FXML
+    private Text winnerScore;
 
     private List<Pane> listPaneOnPlayer1 = new ArrayList<Pane>(); // not exist -> need to declare
     private List<Pane> listPaneOnPlayer2 = new ArrayList<Pane>();
+    private List<Text> listNumerGems = new ArrayList<Text>();
     private Player player;
     private Board board;
 
@@ -186,28 +194,6 @@ public class PlayController{
 
     @FXML
     public void initialize() {
-
-        //set btnCL btnCCL invisible
-        btnCLCell01.setVisible(false);
-        btnCLCell02.setVisible(false);
-        btnCLCell03.setVisible(false);
-        btnCLCell04.setVisible(false);
-        btnCLCell05.setVisible(false);
-        btnCLCell07.setVisible(false);
-        btnCLCell08.setVisible(false);
-        btnCLCell09.setVisible(false);
-        btnCLCell10.setVisible(false);
-        btnCLCell11.setVisible(false);
-        btnCCLCell01.setVisible(false);
-        btnCCLCell02.setVisible(false);
-        btnCCLCell03.setVisible(false);
-        btnCCLCell04.setVisible(false);
-        btnCCLCell05.setVisible(false);
-        btnCCLCell07.setVisible(false);
-        btnCCLCell08.setVisible(false);
-        btnCCLCell09.setVisible(false);
-        btnCCLCell10.setVisible(false);
-        btnCCLCell11.setVisible(false);
 
         //set 2 frame invisible
         turnPlayer1.setVisible(false);
@@ -225,22 +211,52 @@ public class PlayController{
         listPaneOnPlayer2.add(cell10);
         listPaneOnPlayer2.add(cell11);
 
+        //set list number of gems on board
+        listNumerGems.add(numGemsCell00);
+        listNumerGems.add(numGemsCell01);
+        listNumerGems.add(numGemsCell02);
+        listNumerGems.add(numGemsCell03);
+        listNumerGems.add(numGemsCell04);
+        listNumerGems.add(numGemsCell05);
+        listNumerGems.add(numGemsCell06);
+        listNumerGems.add(numGemsCell07);
+        listNumerGems.add(numGemsCell08);
+        listNumerGems.add(numGemsCell09);
+        listNumerGems.add(numGemsCell10);
+        listNumerGems.add(numGemsCell11);
+
+
+        for (int i=0; i < board.getNumSquares()/2; i++) {
+            Pane pane1 = listPaneOnPlayer1.get(i);
+            for (Node child : pane1.getChildren()) {
+                if (child instanceof ImageView) {
+                    ImageView imageView = (ImageView) child;
+                    imageView.setVisible(false);
+                }
+            }
+
+            Pane pane2 = listPaneOnPlayer2.get(i);
+            for (Node child : pane2.getChildren()) {
+                if (child instanceof ImageView) {
+                    ImageView imageView = (ImageView) child;
+                    imageView.setVisible(false);
+                }
+            }
+        }
+
         //set end game screen invisible
         btnPlayAgain.setOnAction(event5 ->{
             endGameScreen.setVisible(false);
+            //reset board
             board = new Board();
             player = new Player("player1", "player2", board);
             initialize();
-        });
-
-        btnHomeWinner.setOnAction(event6 ->{
-            // new HomeController();
-            // Stage currentStage = (Stage) cell01.getScene().getWindow();
-            // currentStage.close();
-            endGameScreen.setVisible(false);
+            //reset score
+            player.resetScore();
+            this.setDisplay();
 
         });
-        
+
         endGameScreen.setVisible(false);
 
         //get cells on player 1
@@ -255,6 +271,7 @@ public class PlayController{
                     System.out.println("Cell could not be clicked");
                     
                 }
+
                 else{
                     // show direction
                     showDirection(pane);
@@ -265,18 +282,9 @@ public class PlayController{
                         if (j != index ){
                             paneAround.setDisable(true);
                         }
-                        
                     }
-
                 }
-
-                
-
-            
-
             });
-
-            
         }
 
         //set direction then spread gems of player 1
@@ -301,44 +309,36 @@ public class PlayController{
                         player.spreadGems("player1",board.getBoard()[index+1], player.getDirection());
 
                         //fake end game
-                        board.getBoard()[0].setEmpty();
+                        // board.getBoard()[0].setEmpty();
                         board.getBoard()[6].setEmpty();
 
                         //check end game
                         if (board.endGame()){
                             System.out.println("end game");
                             player.assembleSmallGems();
-                            scorePlayer2.setText(Integer.toString(player.getScore("player2")));
+                            if (player.getScore("player1") > player.getScore("player2")){
+                                winnerName.setText("1");
+                                winnerScore.setText(Integer.toString(player.getScore("player1")));
+                            }
+                            else if (player.getScore("player1") < player.getScore("player2")){
+                                winnerName.setText("2");
+                                winnerScore.setText(Integer.toString(player.getScore("player2")));
+                            }
+                            else{
+                                winnerName.setText("Draw");
+                                winnerScore.setText(Integer.toString(player.getScore("player1")));
+                            }
+
                             endGameScreen.setVisible(true);
-                            scorePlayer1.setText(Integer.toString(player.getScore("player1")));
 
-                            
-
-                          
                         }
                         //display number of gems on board 
-                        numGemsCell00.setText(Integer.toString(board.getBoard()[0].getGemList().size()));
-                        numGemsCell01.setText(Integer.toString(board.getBoard()[1].getGemList().size()));
-                        numGemsCell02.setText(Integer.toString(board.getBoard()[2].getGemList().size()));
-                        numGemsCell03.setText(Integer.toString(board.getBoard()[3].getGemList().size()));
-                        numGemsCell04.setText(Integer.toString(board.getBoard()[4].getGemList().size()));
-                        numGemsCell05.setText(Integer.toString(board.getBoard()[5].getGemList().size()));
-                        numGemsCell06.setText(Integer.toString(board.getBoard()[6].getGemList().size()));
-                        numGemsCell07.setText(Integer.toString(board.getBoard()[7].getGemList().size()));
-                        numGemsCell08.setText(Integer.toString(board.getBoard()[8].getGemList().size()));
-                        numGemsCell09.setText(Integer.toString(board.getBoard()[9].getGemList().size()));
-                        numGemsCell10.setText(Integer.toString(board.getBoard()[10].getGemList().size()));
-                        numGemsCell11.setText(Integer.toString(board.getBoard()[11].getGemList().size()));
+                        this.setDisplay();
 
-                        
-                        
                         //display score
-                        scorePlayer1.setText(Integer.toString(player.getScore("player1")));
-                        System.out.println("after clicking direction"+Integer.toString(board.getBoard()[index+1].getGemList().size()));
                         
                         // switch turn
                         switchTurn(pane); // still have error when click to direction it not change turn, 3 time after and also not invisible
-                        System.out.println(Integer.toString(player.getTurn()));
 
                         //consume event avoid to click to parent
                         event1.consume();
@@ -402,41 +402,31 @@ public class PlayController{
 
                         //fake end game
                         board.getBoard()[0].setEmpty();
-                        board.getBoard()[6].setEmpty();
+                        // board.getBoard()[6].setEmpty();
 
                         //check end game
                         if (board.endGame()){
                             System.out.println("end game");
                             player.assembleSmallGems();
-                            scorePlayer2.setText(Integer.toString(player.getScore("player2")));
-                            scorePlayer1.setText(Integer.toString(player.getScore("player1")));
-                            endGameScreen.setVisible(true);
+                            if (player.getScore("player1") > player.getScore("player2")){
+                                winnerName.setText("1");
+                                winnerScore.setText(Integer.toString(player.getScore("player1")));
+                            }
+                            else if (player.getScore("player1") < player.getScore("player2")){
+                                winnerName.setText("2");
+                                winnerScore.setText(Integer.toString(player.getScore("player2")));
+                            }
+                            else{
+                                winnerName.setText("Draw");
+                                winnerScore.setText(Integer.toString(player.getScore("player1")));
+                            }
 
-    
+                            endGameScreen.setVisible(true);
                           
                         }
 
-                        //display number of gems
-                        numGemsCell00.setText(Integer.toString(board.getBoard()[0].getGemList().size()));
-                        numGemsCell01.setText(Integer.toString(board.getBoard()[1].getGemList().size()));
-                        numGemsCell02.setText(Integer.toString(board.getBoard()[2].getGemList().size()));
-                        numGemsCell03.setText(Integer.toString(board.getBoard()[3].getGemList().size()));
-                        numGemsCell04.setText(Integer.toString(board.getBoard()[4].getGemList().size()));
-                        numGemsCell05.setText(Integer.toString(board.getBoard()[5].getGemList().size()));
-                        numGemsCell06.setText(Integer.toString(board.getBoard()[6].getGemList().size()));
-                        numGemsCell07.setText(Integer.toString(board.getBoard()[7].getGemList().size()));
-                        numGemsCell08.setText(Integer.toString(board.getBoard()[8].getGemList().size()));
-                        numGemsCell09.setText(Integer.toString(board.getBoard()[9].getGemList().size()));
-                        numGemsCell10.setText(Integer.toString(board.getBoard()[10].getGemList().size()));
-                        numGemsCell11.setText(Integer.toString(board.getBoard()[11].getGemList().size()));
-
-                        
-
-                        //set score
-                        scorePlayer2.setText(Integer.toString(player.getScore("player2")));
-                        System.out.println("after clicking direction" + Integer.toString(board.getBoard()[index+7].getGemList().size()));
-
-                        
+                        //display number of gems and score
+                        this.setDisplay();
 
                         // switch turn
                         switchTurn(pane);
@@ -549,6 +539,16 @@ public class PlayController{
             }
         }
     }
+
+    public void setDisplay(){
+        for (int i=0; i < board.getBoard().length; i++){
+            listNumerGems.get(i).setText(Integer.toString(board.getBoard()[i].getGemList().size()));
+
+        }
+        scorePlayer2.setText(Integer.toString(player.getScore("player2")));
+        scorePlayer1.setText(Integer.toString(player.getScore("player1")));
+    }
+
 
 }
 

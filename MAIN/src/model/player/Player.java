@@ -89,6 +89,10 @@ public class Player { //set action with board
         }
         return 0;
     }
+    public void resetScore(){
+        this.score1 = 0;
+        this.score2 = 0;
+    }
 
     public void spreadGems(String player, Cell cellChosen, int direction){
             Cell stopCell;
