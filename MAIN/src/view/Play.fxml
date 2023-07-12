@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="768.0" fitWidth="1024.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/Users/nguyenbathiem/Downloads/play-01.png" />
+            <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/play.png" />
          </image>
       </ImageView>
       <Text fx:id="scorePlayer1" fill="WHITE" layoutX="240.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
@@ -240,12 +240,12 @@
       </Label>
       <ImageView fx:id="turnPlayer2" fitHeight="192.0" fitWidth="449.0" layoutX="528.0" layoutY="587.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/Users/nguyenbathiem/Downloads/frame-02.png" />
+            <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/frame-02.png" />
          </image>
       </ImageView>
       <ImageView fx:id="turnPlayer1" fitHeight="192.0" fitWidth="433.0" layoutX="-11.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/Users/nguyenbathiem/Downloads/frame-03.png" />
+            <Image url="file:/Users/nguyenbathiem/o-an-quan-thiem/MAIN/src/view/images/frame-03.png" />
          </image>
       </ImageView>
    </children>
