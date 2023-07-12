@@ -41,13 +41,13 @@ public abstract class Cell {
         this.gemList.clear();
     }
 
-    public Gem moveGem() {
-        if (gemList.isEmpty()) {
-            // Handle the case when there are no gems in the cell
-            // You can either return a default Gem object or throw an exception
-            return null; // Or return a default Gem object
-        } else {
-            return gemList.remove(0); // Return the moved gem
-        }
-    }
+    // public Gem moveGem() {
+    //     if (gemList.isEmpty()) {
+    //         // Handle the case when there are no gems in the cell
+    //         // You can either return a default Gem object or throw an exception
+    //         return null; // Or return a default Gem object
+    //     } else {
+    //         return gemList.remove(0); // Return the moved gem
+    //     }
+    // }
 }

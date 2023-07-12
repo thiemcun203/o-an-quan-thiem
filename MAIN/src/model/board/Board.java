@@ -106,7 +106,7 @@ public class Board {
             }
         }
 
-        for (Gem gem :cells[12].getGemList()){
+        for (Gem gem : cells[12].getGemList()){
             if (gem instanceof BigGem){
                 return false;
             }
